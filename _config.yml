@@ -84,7 +84,7 @@ JB :
   comments :
     provider : disqus 
     disqus :
-      short_name : shoebillk_blog 
+      short_name : shoebillkblog 
     livefyre :
       site_id : 123
     intensedebate :
