@@ -17,4 +17,4 @@ Vim에서 Esc키는 삽입 모드에서 명령 모드로 번환하는 키로 아
 
 > Vi가 만들어질 당시에 쓰였던 키보드는 ADM3A 이란 터미널에 딸려 있는 키보드였다. 이 키보드를 기준으로 만든 Vi에서는 Esc가 모드 전환에 적당한 키보드였다. 이후 키보드 레이아웃이 바뀌면서 Esc는 자주 누르기 불편한 위치로 이동하였다.
 
-![key width=200](http://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/KB_Terminal_ADM3A.svg/931px-KB_Terminal_ADM3A.svg.png)
+![ADM3A keyboard layout](http://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/KB_Terminal_ADM3A.svg/931px-KB_Terminal_ADM3A.svg.png)
