@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[Byounghoon's Personal Blog]]></description><link>https://byounghoonkim.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 06 Jun 2022 08:47:14 GMT</lastBuildDate><item><title><![CDATA[About Me]]></title><description><![CDATA[김병훈 (Byounghoon Kim) GitHub |
+Linkedin |
+Email 네이버 클로바 (Naver Clova) AI Product, Platform 개발 Golang, Python 오늘의집 (버킷플레이스) 백엔드 개발자 Rails…]]></description><link>https://byounghoonkim.github.io/</link><guid isPermaLink="false">https://byounghoonkim.github.io/</guid><pubDate>Mon, 06 Jun 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;김병훈 (Byounghoon Kim)&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/byounghoonkim&quot;&gt;GitHub&lt;/a&gt; |
+&lt;a href=&quot;https://www.linkedin.com/in/%EB%B3%91%ED%9B%88-%EA%B9%80-6608638b/&quot;&gt;Linkedin&lt;/a&gt; |
+&lt;a href=&quot;mailto:blue021@gmail.com&quot;&gt;Email&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;네이버 클로바 (&lt;a href=&quot;https://clova.ai/ko&quot;&gt;Naver Clova&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;AI Product, Platform 개발&lt;/li&gt;
+&lt;li&gt;Golang, Python&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;오늘의집 (&lt;a href=&quot;https://www.bucketplace.co.kr/&quot;&gt;버킷플레이스&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;백엔드 개발자&lt;/li&gt;
+&lt;li&gt;Rails&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;안랩 (&lt;a href=&quot;https://www.ahnlab.com/&quot;&gt;AhnLab&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;개발자&lt;/li&gt;
+&lt;li&gt;Windows Kernel Network Filter Driver&lt;/li&gt;
+&lt;li&gt;macOS Kext&lt;/li&gt;
+&lt;li&gt;C, C++, Ruby, Rails, GoLang&lt;/li&gt;
+&lt;li&gt;Host base Firewall, IPS, Anti-Pharming&lt;/li&gt;
+&lt;li&gt;V3 365/Lite팀, 기반기술팀&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[표준 Go 프로젝트 레이아웃(Standard Go Project Layout)]]></title><description><![CDATA[원문 GibHub - 표준 Go 프로젝트 레이아웃 원문(영어) Github - Standard Go Project Layout Go 애플리케이션 프로젝트를 위한 기본 레이아웃을 설명하는 문서입니다.
+코어 Go…]]></description><link>https://byounghoonkim.github.io/go-project-layout/</link><guid isPermaLink="false">https://byounghoonkim.github.io/go-project-layout/</guid><pubDate>Fri, 26 Jun 2020 14:06:31 GMT</pubDate><content:encoded>&lt;ul&gt;
+&lt;li&gt;원문 GibHub - &lt;a href=&quot;https://github.com/byounghoonkim/project-layout&quot;&gt;표준 Go 프로젝트 레이아웃&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;원문(영어) Github - &lt;a href=&quot;https://github.com/golang-standards/project-layout&quot;&gt;Standard Go Project Layout&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Go 애플리케이션 프로젝트를 위한 기본 레이아웃을 설명하는 문서입니다.
+코어 Go 개발팀이 정의한 공식적인 표준은 아니지만, Go 에코시스템 안에서는 일반적인 역사적이고 떠오르는 프로젝트 레이아웃 패턴들입니다.
+이들 중 몇몇은 다른 것들 보다 더 친숙합니다.
+또한 충분히 큰 규모의 실제 애플리케이션에 공통적인 여러 지원 디렉토리 등 여러가지 작은 개선 사항이 포함되어 있습니다.&lt;/p&gt;
+&lt;p&gt;Go 언어를 배울 때나 PoC나 토이 프로젝트를 만들 때는 이 프로젝트 레이아웃을 적용하는 것은 과합니다.
+이럴 때는 심플하게 시작하세요(&lt;code class=&quot;language-text&quot;&gt;main.go&lt;/code&gt; 파일 하나면 충분합니다).
+프로젝트가 커지면 코드를 잘 구조화 시키는 것이 중요하다는 사실을 기억하세요.
+그렇지 않으면 코드는 수많은 숨겨진 종속성들과 전역 상태로 엉망이 될 것입니다.
+프로젝트에 더 많은 사람들이 같이 협업한다면 더 많은 구조가 필요합니다.
+이때 패키지와 라이브러리를 관리하는 일반적인 방법을 도입하는 것이 중요합니다.&lt;/p&gt;
+&lt;p&gt;오픈 소스 프로젝트나 다른 프로젝트에 임포트 되는 프로젝트는 외부로 노출되지 않는(private, 다른 말로는 &lt;code class=&quot;language-text&quot;&gt;internal&lt;/code&gt;) 패키지와 코드를 가지는 것이 중요합니다.
+리포지토리를 복제해서 필요한 것을 유지하고 나머지는 모두 삭제하세요!
+그것이 있다고 해서 그것을 사용해야 한다는 의미는 아닙니다.
+단일 프로젝트에는 이 패턴들은 해당사항이 없습니다.
+&lt;code class=&quot;language-text&quot;&gt;vendor&lt;/code&gt; 패턴 조차도 보편적인 것은 아닙니다.&lt;/p&gt;
+&lt;p&gt;마침내 Go 1.14에서 &lt;a href=&quot;https://github.com/golang/go/wiki/Modules&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Go Modules&lt;/code&gt;&lt;/a&gt; 이 프로덕션 배포 준비가 되었습니다.
+사용하지 않을 특별한 사유가 없다면 &lt;a href=&quot;https://blog.golang.org/using-go-modules&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Go Modules&lt;/code&gt;&lt;/a&gt;를 사용하세요. 그러면 프로젝트를 어디에 두던지 $GOPATH에 대해 신경쓸 필요가 없어집니다.
+이 저장소의 기본 &lt;code class=&quot;language-text&quot;&gt;go.mod&lt;/code&gt; 파일은 프로젝트가 Github에서 호스팅 되고 있다고 가정합니다만, 이는 필수 사항은 아닙니다.&lt;/p&gt;
+&lt;p&gt;모듈 경로는 아무 것이나 지정할 수 있지만, 첫번째 모듈의 경로 이름은 점(dot)을 포함해야 합니다(현재 버전의 Go는 이를 강제하지 않으나 약간 오래된 버전을 사용한다면 이로 인해 빌드가 실패 할 수 있으니 놀라지 마세요).
+이에 대해 더 자세히 알고 싶다면 &lt;a href=&quot;https://github.com/golang/go/issues/37554&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;37554&lt;/code&gt;&lt;/a&gt; 와 &lt;a href=&quot;https://github.com/golang/go/issues/32819&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;32819&lt;/code&gt;&lt;/a&gt; 이슈를 참고하세요.&lt;/p&gt;
+&lt;p&gt;이 프로젝트 레이아웃은 의도적으로 일반적입니다. 특정 Go 패키지 구조에 맞추려고 노력하지 않았습니다.
+이는 커퓨티니의 힘입니다.
+새로운 패턴을 알게 되거나 이미 있는 패턴이 업데이트가 필요하면 이슈를 생성해 주세요.&lt;/p&gt;
+&lt;p&gt;네이밍, 포맷팅, 스타일 등에서 도움이 필요하면 &lt;a href=&quot;https://golang.org/cmd/gofmt/&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;gofmt&lt;/code&gt;&lt;/a&gt; 와 &lt;a href=&quot;https://github.com/golang/lint&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;golint&lt;/code&gt;&lt;/a&gt;를 실행하는 것이 출발점입니다.
+그리고 Go 코드 스타일 가이드라인과 추천문서를 읽으세요:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://talks.golang.org/2014/names.slide&quot;&gt;https://talks.golang.org/2014/names.slide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://golang.org/doc/effective_go.html#names&quot;&gt;https://golang.org/doc/effective_go.html#names&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://blog.golang.org/package-names&quot;&gt;https://blog.golang.org/package-names&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/golang/go/wiki/CodeReviewComments&quot;&gt;https://github.com/golang/go/wiki/CodeReviewComments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://rakyll.org/style-packages&quot;&gt;Style guideline for Go packages&lt;/a&gt; (rakyll/JBD)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;추가적인 배경 정보가 필요하면 &lt;a href=&quot;https://medium.com/golang-learn/go-project-layout-e5213cdcfaa2&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Go Project Layout&lt;/code&gt;&lt;/a&gt;를 보세요.&lt;/p&gt;
+&lt;p&gt;패키지 네이밍 및 구성과 기타 코드 구조 권장 사항에 대한 추가 정보:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=PTE4VJIdHPg&quot;&gt;GopherCon EU 2018: Peter Bourgon - Best Practices for Industrial Programming&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=MzTcsI6tn-0&quot;&gt;GopherCon Russia 2018: Ashley McNamara + Brian Ketelsen - Go best practices.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=ltqV6pDKZD8&quot;&gt;GopherCon 2017: Edward Muller - Go Anti-Patterns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=oL6JBUk6tj0&quot;&gt;GopherCon 2018: Kat Zien - How Do You Structure Your Go Apps&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Go 디렉토리들&lt;/h2&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/cmd&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;프로젝트를 위한 메인 애플리케이션들.&lt;/p&gt;
+&lt;p&gt;각 애플리케이션의 디렉토리 이름은 원하는 실행파일의 이름과 동일해야 합니다(예, &lt;code class=&quot;language-text&quot;&gt;/cmd/myapp&lt;/code&gt;).
+애플리케이션 디렉토리에 많은 코드를 두지 마세요.
+다른 프로젝트에서 임포트되고 사용되는 것을 고려한다면 코드는 &lt;code class=&quot;language-text&quot;&gt;/pkg&lt;/code&gt; 디렉토리에 있어야 합니다.
+재사용이 불가하거나 재사용을 원치 않는 코드는 &lt;code class=&quot;language-text&quot;&gt;/internal&lt;/code&gt; 디렉토리에 두세요.
+다른 사람들이 어떻게 사용할지 모르니, 확실히 의도를 밝혀주세요.
+일반적으로 &lt;code class=&quot;language-text&quot;&gt;/internal&lt;/code&gt;과 &lt;code class=&quot;language-text&quot;&gt;/pkg&lt;/code&gt;폴더에서 코드를 임포트하고 호출하는 짧은 &lt;code class=&quot;language-text&quot;&gt;main&lt;/code&gt; 함수를 작성합니다.
+예시를 보려면 &lt;a href=&quot;https://github.com/byounghoonkim/project-layout/blob/translate-ko/cmd/README.md&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;/cmd&lt;/code&gt;&lt;/a&gt; 디렉토리를 참고하세요.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/internal&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;비공개(private) 애플리케이션 / 라이브러리 코드.&lt;/p&gt;
+&lt;p&gt;다른 애플리케이션이나 라이브러리에 임포트되길 원하는지 않는 코드들입니다.
+Go 컴파일러 자체에서 강제되는 레이아웃 패턴입니다.
+더 자세한 사항은 Go 1.4 &lt;a href=&quot;https://golang.org/doc/go1.4#internalpackages&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;release notes&lt;/code&gt;&lt;/a&gt;을 참고하세요.
+&lt;code class=&quot;language-text&quot;&gt;internal&lt;/code&gt;는 최상위 레벨 디렉토리에만 적용되는 것은 아닙니다.
+프로젝트 트리의 어느 레벨에서든 하나 이상의 &lt;code class=&quot;language-text&quot;&gt;internal&lt;/code&gt; 디렉토리를 적용할 수 있습니다.
+공유할 것과 공유하지 않을 코드를 나누기 위해 인터널 패키지에 구조를 더 추가할 수 있습니다.
+이 패턴은 (특히, 작은 규모의 프로젝트에서는) 필수는 아닙니다만, 의도된 패키지 사용을 보여주는 좋은 시각적 단서 입니다.
+실제 애플리케이션 코드를 &lt;code class=&quot;language-text&quot;&gt;/internal/app&lt;/code&gt;(예시, &lt;code class=&quot;language-text&quot;&gt;/internal/app/myapp&lt;/code&gt;)에 위치 시킬 수 있고 이 앱들이 공유하는 코드는  &lt;code class=&quot;language-text&quot;&gt;/internal/pkg&lt;/code&gt;(예시, &lt;code class=&quot;language-text&quot;&gt;/internal/pkg/myprivlib&lt;/code&gt;) 디렉토리에 위치 시킬 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/pkg&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;외부 애플리케이션에 의해 사용이 가능한 라이브러리 코드(예시, &lt;code class=&quot;language-text&quot;&gt;/pkg/mypubliclib&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;다른 프로젝트들은 잘 동작하기를 기대하면서 이 라이브러리들을 임포트 할 것입니다. 그래서 여기에 무엇인가를 추가할 때는 신중해야 합니다. :-) 프라이빗 패키지를 임포트 불가하도록 하기위한 방법은 Go에 의해 강제 되는 &lt;code class=&quot;language-text&quot;&gt;internal&lt;/code&gt; 디렉토리입니다.
+&lt;code class=&quot;language-text&quot;&gt;/pkg&lt;/code&gt;은 다른 이들이 사용하기에  이 디렉토리에 코드는 안전하다는 커뮤니테이션을 명시적으로 할 수 있는 좋은 방법입니다.&lt;/p&gt;
+&lt;p&gt;Travis Jeffery의 &lt;a href=&quot;https://travisjeffery.com/b/2019/11/i-ll-take-pkg-over-internal/&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;I&apos;ll take pkg over internal&lt;/code&gt;&lt;/a&gt; 블로그 포스트는  &lt;code class=&quot;language-text&quot;&gt;pkg&lt;/code&gt;와 &lt;code class=&quot;language-text&quot;&gt;internal&lt;/code&gt; 디렉토리의 좋은 개요와 사용에 대한 이해를 제공합니다.&lt;/p&gt;
+&lt;p&gt;이 패턴은 프로젝트 루트 디렉토리에 Go가 아닌 컴포넌트와 디렉토리를 많이 포함하고 있을 때 다양한 Go 툴들을 쉽게 실행할 수 있도록 코드를 한곳에 그룹핑해 주는 방법을 제공합니다(이 영상들에서 언급한것 처럼: &lt;a href=&quot;https://www.youtube.com/watch?v=PTE4VJIdHPg&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Best Practices for Industrial Programming&lt;/code&gt;&lt;/a&gt; from GopherCon EU 2018, &lt;a href=&quot;https://www.youtube.com/watch?v=oL6JBUk6tj0&quot;&gt;GopherCon 2018: Kat Zien - How Do You Structure Your Go Apps&lt;/a&gt; 그리고 &lt;a href=&quot;https://www.youtube.com/watch?v=3gQa1LWwuzk&quot;&gt;GoLab 2018 - Massimiliano Pippi - Project layout patterns in Go&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;이 레이아웃 패턴을 사용하는 유명한 Go 리포지토리를 보려면 &lt;a href=&quot;https://github.com/byounghoonkim/project-layout/blob/translate-ko/pkg/README.md&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;/pkg&lt;/code&gt;&lt;/a&gt;를 참고하세요.
+이 패턴을 일반적이지만, 보편적으로 받아들여 지는 것은 아니며 일부 Go 커뮤니티에서는 추천하지 않기도 합니다.&lt;/p&gt;
+&lt;p&gt;앱 프로젝트가 정말 작거나 중첩 레벨을 추가하는 것이 별로 가치가 없거나(또는 정말 원치 않는다면 :-)) 이 패턴을 사용하지 않아도 괜찮습니다.
+프로젝트가 충분히 커져서 루트 디렉토리가 정말 붐빌 때(특히, Go가 아닌 컴포넌트가 많을 때)를 고려해 보세요.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/vendor&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;애플리케이션 종속성(수동으로 또는 &lt;a href=&quot;https://github.com/golang/go/wiki/Modules&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Go Modules&lt;/code&gt;&lt;/a&gt; 같은 새롭게 내장된 종속성 관리 도구에 의해 관리됨)
+&lt;code class=&quot;language-text&quot;&gt;go mod vendor&lt;/code&gt; 명령은 &lt;code class=&quot;language-text&quot;&gt;/vendor&lt;/code&gt; 폴더를 만들게 됩니다.
+&lt;code class=&quot;language-text&quot;&gt;-mod=vendor&lt;/code&gt; 옵션이 기본값인 Go 1.14 를 사용하지 않는다면 &lt;code class=&quot;language-text&quot;&gt;go build&lt;/code&gt; 명령에 해당 옵션이 필요할 수도 있습니다.&lt;/p&gt;
+&lt;p&gt;라이브러리를 빌딩 중이라면 애플리케이션 종속성 폴더를 커밋하지 마세요.&lt;/p&gt;
+&lt;p&gt;Go &lt;a href=&quot;https://golang.org/doc/go1.13#modules&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;1.13&lt;/code&gt;&lt;/a&gt;부터 모듈 프록시 기능을 활성화 되었습니다(기본 프록시 서버로 &lt;a href=&quot;https://proxy.golang.org&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;https://proxy.golang.org&lt;/code&gt;&lt;/a&gt; 사용).
+이 기능이 여러분의 요구와 제약사항에 부합하는지 확인하려면 &lt;a href=&quot;https://blog.golang.org/module-mirror-launch&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;여기&lt;/code&gt;&lt;/a&gt;를 읽어 보세요.
+만약 부합한다면 &lt;code class=&quot;language-text&quot;&gt;vendor&lt;/code&gt; 디렉토리는 전혀 필요하지 않습니다.&lt;/p&gt;
+&lt;h2&gt;서버 애플리케이션 디렉토리&lt;/h2&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/api&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;OpenAPI/Swagger 스펙, JSON 스키마 파일, 프로토콜 정의 파일.&lt;/p&gt;
+&lt;p&gt;예시를 보려면 &lt;a href=&quot;https://github.com/byounghoonkim/project-layout/blob/translate-ko/api/README.md&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;/api&lt;/code&gt;&lt;/a&gt; 디렉토리를 보세요.&lt;/p&gt;
+&lt;h2&gt;웹 애플리케이션 디렉토리&lt;/h2&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/web&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;웹 애플리케이션용 컴포넌트들: 정적 웹 에셋, 서버 사이드 템플릿 그리고 SPA&lt;/p&gt;
+&lt;h2&gt;범용 애플리케이션 디렉토리&lt;/h2&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/configs&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;설정 파일 템플릿 또는 기본 설정들.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;confd&lt;/code&gt;나 &lt;code class=&quot;language-text&quot;&gt;consul-template&lt;/code&gt; 템플릿 파일을 여기 두세요.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/init&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;System init (systemd, upstart, sysv) 와 프로세스 관리/감독 (runit, supervisord) 설정들.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/scripts&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;다양한 빌드, 설치, 분석 등의 오퍼레이션을 수행하기 위한 스크립트들.&lt;/p&gt;
+&lt;p&gt;여기 스크립트를 작성해서 루트 레벨 Makefile을 작고 심플하게 유지합니다.(예시, &lt;a href=&quot;https://github.com/hashicorp/terraform/blob/master/Makefile&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;https://github.com/hashicorp/terraform/blob/master/Makefile&lt;/code&gt;&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;예시를 보려면 &lt;a href=&quot;https://github.com/byounghoonkim/project-layout/blob/translate-ko/scripts/README.md&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;/scripts&lt;/code&gt;&lt;/a&gt; 디렉토리를 보세요.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/build&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;패키징과 CI(Continuous Integration).&lt;/p&gt;
+&lt;p&gt;클라우드(AMI), 컨테이너(Docker), OS (deb, rpm, pkg) 패키지 설정들과 스크립트를 &lt;code class=&quot;language-text&quot;&gt;/build/package&lt;/code&gt; 디렉토리에 두세요.&lt;/p&gt;
+&lt;p&gt;CI (travis, circle, drone) 설정과 스크립트는 &lt;code class=&quot;language-text&quot;&gt;/build/ci&lt;/code&gt; 디렉토리에 두세요.
+어떤 CI 도구들(예, Travis CI)들은 설정파일의 위치에 대해 매우 까다로운 편입니다.
+(가능하면) &lt;code class=&quot;language-text&quot;&gt;/build/ci&lt;/code&gt; 디렉토리에 설정 파일들을 위치 시키고 CI 도구가 원하는 곳에 파일을 링크 시켜 보세요.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/deployments&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;IaaS, PaaS, 시스템 그리고 컨테이너 오케스트레이션 배포 설정들과 템플릿들(docker-compose, kubernetes/helm, mesos, terraform, bosh).
+어떤 리포들(특히 쿠버네티스에 배포하는 앱들)은 이 디렉토리를 &lt;code class=&quot;language-text&quot;&gt;/deploy&lt;/code&gt; 로 정합니다.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/test&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;추가적인 외부 테스트 앱과 테스트 데이터.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;/test&lt;/code&gt;는 원하는대로 자유롭게 구조화 해도 됩니다.
+큰 프로젝트에서는 데이터 서브 디릭토리를 만들기도 합니다.
+예를 들면, Go가 디렉토리 내부 내용을 무시 하는 &lt;code class=&quot;language-text&quot;&gt;/test/data&lt;/code&gt; 또는 &lt;code class=&quot;language-text&quot;&gt;/test/testdata&lt;/code&gt; 를 만들 수 있습니다.
+Go는 ”.” 또는 ”_“ㅣ 로 시작하는 디렉토리와 파일 또한 무시합니다. 그래서 테스트 데이터 디렉토리 이름을 좀더 유연하게 정할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;예시를 &lt;a href=&quot;https://github.com/byounghoonkim/project-layout/blob/translate-ko/test/README.md&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;/test&lt;/code&gt;&lt;/a&gt; 디렉토리를 보세요.&lt;/p&gt;
+&lt;h2&gt;기타 디렉토리들&lt;/h2&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/docs&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;디자인 문서와 유저 문서( 그리고 godoc 생성 문서).&lt;/p&gt;
+&lt;p&gt;예시를 보려면 &lt;a href=&quot;https://github.com/byounghoonkim/project-layout/blob/translate-ko/docs/README.md&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;/docs&lt;/code&gt;&lt;/a&gt; 디렉토리를 보세요.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/tools&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;프로젝트를 위한 지원 도구들.
+이 도구들은 &lt;code class=&quot;language-text&quot;&gt;/pkg&lt;/code&gt;와 &lt;code class=&quot;language-text&quot;&gt;/internal&lt;/code&gt; 디렉토리로부터 코드를 임포트 할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;예시는 &lt;a href=&quot;https://github.com/byounghoonkim/project-layout/blob/translate-ko/tools/README.md&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;/tools&lt;/code&gt;&lt;/a&gt; 디렉토리를 보세요.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/examples&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;애플리케이션과 공개 라이브러리를 위한 예시들.&lt;/p&gt;
+&lt;p&gt;예시는 &lt;a href=&quot;https://github.com/byounghoonkim/project-layout/blob/translate-ko/examples/README.md&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;/examples&lt;/code&gt;&lt;/a&gt; 디렉토리를 보세요.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/third_party&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;외부 헬퍼 도구들, 포크된 코드 그리고 기타 3rd 파티 유틸리티들(예시, Swagger UI).&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/githooks&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Git 훅들.&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/assets&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;기타 프로젝트에서 사용된 에셋들(이미지, 로고 등등).&lt;/p&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/website&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Github 페이지를 이용하지 않을 때 프로젝트 웹사이트 데이터는 여기에 위치시킵니다.&lt;/p&gt;
+&lt;p&gt;예를 보려면 &lt;a href=&quot;https://github.com/byounghoonkim/project-layout/blob/translate-ko/website/README.md&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;/website&lt;/code&gt;&lt;/a&gt; 디렉토리를 보세요.&lt;/p&gt;
+&lt;h2&gt;만들지 말아야 할 디렉토리&lt;/h2&gt;
+&lt;h3&gt;&lt;code class=&quot;language-text&quot;&gt;/src&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;어떤 Go 프로젝트들은 &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt; 폴더가 있는데, 이것이 흔한 패턴인 Java 세계에서 넘어 온 개발자들에게서 주로 일어 납니다.
+Go 코드와 Go 프로젝트가 Java 처럼 보이지 않도록 되도록이면 이런 Java 패턴을 채택하지 마세요. :-)&lt;/p&gt;
+&lt;p&gt;프로젝트 레벨의 &lt;code class=&quot;language-text&quot;&gt;/src&lt;/code&gt; 디렉토리와 &lt;a href=&quot;https://golang.org/doc/code.html&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;How to Write Go Code&lt;/code&gt;&lt;/a&gt;에서 설명하는 워크스페이스를 위한 &lt;code class=&quot;language-text&quot;&gt;/src&lt;/code&gt; 디렉토리를 혼동하지 마세요.
+&lt;code class=&quot;language-text&quot;&gt;$GOPATH&lt;/code&gt; 환경 변수는 (현재) 워크스페이스를 가리키고 있습니다(윈도우가 아닌 시스템에서는 기본적으로 &lt;code class=&quot;language-text&quot;&gt;$HOME/go&lt;/code&gt;를 가리킴).
+이 워크스페이스는 최상위 레벨에 &lt;code class=&quot;language-text&quot;&gt;/pkg&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;/bin&lt;/code&gt; 그리고 &lt;code class=&quot;language-text&quot;&gt;/src&lt;/code&gt; 디렉토리를 가지고 있습니다.
+실제 프로젝트들은 &lt;code class=&quot;language-text&quot;&gt;/src&lt;/code&gt; 아래 서브 디렉토리로 끝나게 됩니다. 그래서 프로젝트에   &lt;code class=&quot;language-text&quot;&gt;/src&lt;/code&gt; 디렉토리를 가지게 되면 프로젝트 경로는 이렇게 보일것입니다:&lt;code class=&quot;language-text&quot;&gt;/some/path/to/workspace/src/your_project/src/your_code.go&lt;/code&gt;.
+Go 1.11 버전 이상에서는 &lt;code class=&quot;language-text&quot;&gt;GOPATH&lt;/code&gt; 외부에 프로젝트를 위치시킬 수 있습니만,  여전히 이 레이아웃 패턴을 적용시키는 좋은 생각이라는 의미는 아닙니다.&lt;/p&gt;
+&lt;h2&gt;Badges&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://goreportcard.com/&quot;&gt;Go Report Card&lt;/a&gt; - &lt;code class=&quot;language-text&quot;&gt;gofmt&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;go vet&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;gocyclo&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;golint&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;ineffassign&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;license&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;misspell&lt;/code&gt;로 코드를 스캔 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;github.com/golang-standards/project-layout&lt;/code&gt;를 여러분의 프로젝트 참조로 변경하세요.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://godoc.org&quot;&gt;GoDoc&lt;/a&gt; - GoDoc 생성 문서를 온라인 버전으로 제공합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;링크를 여러분의 프로젝트로 바꾸세요.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Release - 프로젝트의 최신 릴리즈 번호를 보여줍니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;여러분의 Github 링크를 가리키도록 변경하세요.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;[![Go Report Card](https://goreportcard.com/badge/github.com/golang-standards/project-layout?style=flat-square)](https://goreportcard.com/report/github.com/golang-standards/project-layout)
+[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](http://godoc.org/github.com/golang-standards/project-layout)
+[![Release](https://img.shields.io/github/release/golang-standards/project-layout.svg?style=flat-square)](https://github.com/golang-standards/project-layout/releases/latest)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;알림&lt;/h2&gt;
+&lt;p&gt;예시/재사용가능 설정, 스트립트, 코드를 포함한 더 많은 프로젝트 템플릿이 계속 진행 중(WIP)입니다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Golang 패키지 이름(Package Names)]]></title><description><![CDATA[원문 - The Go Blog - Package Names (Sameer Ajmani - 4 February 2015) (원문은 Creative Commons Attribution 3.0 License…]]></description><link>https://byounghoonkim.github.io/golang-package-names/</link><guid isPermaLink="false">https://byounghoonkim.github.io/golang-package-names/</guid><pubDate>Wed, 10 Jun 2020 14:06:31 GMT</pubDate><content:encoded>&lt;p&gt;원문 - &lt;a href=&quot;https://blog.golang.org/package-names&quot;&gt;The Go Blog - Package Names&lt;/a&gt; (Sameer Ajmani - 4 February 2015)&lt;/p&gt;
+&lt;p&gt;(원문은 Creative Commons Attribution 3.0 License 로 배포 되므로 원작자의 동의 없이 번역 및 배포 합니다.)&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/63390149f0bc128f01e3f7b3c9dcac2d/4b190/gopher-package-names.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 63.291139240506325%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMEBf/EABUBAQEAAAAAAAAAAAAAAAAAAAEC/9oADAMBAAIQAxAAAAHTkrXLeKKP/8QAGhABAAIDAQAAAAAAAAAAAAAAAQIRAAMSIf/aAAgBAQABBQLarMeYnpMbLchfP//EABURAQEAAAAAAAAAAAAAAAAAABAR/9oACAEDAQE/Aaf/xAAVEQEBAAAAAAAAAAAAAAAAAAAQEf/aAAgBAgEBPwGH/8QAHhAAAQMEAwAAAAAAAAAAAAAAAAEREgIQIYEiMWH/2gAIAQEABj8Cg7IxKldWlhdDcc+HZ//EABoQAQADAAMAAAAAAAAAAAAAAAEAESExUaH/2gAIAQEAAT8h4cVl7jBtvYdL2QgdyVTCGx6D2BjjWYT/2gAMAwEAAgADAAAAEAwP/8QAFxEAAwEAAAAAAAAAAAAAAAAAARARIf/aAAgBAwEBPxARi//EABcRAAMBAAAAAAAAAAAAAAAAAAEQESH/2gAIAQIBAT8QNav/xAAcEAEAAgMBAQEAAAAAAAAAAAABESEAMUFRYaH/2gAIAQEAAT8QRAepPk1lYWqAgPb7rTipkIMeYoG4GH7vBkAImTJVLjQhQDyuzn//2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Gopher Package Names&quot;
+        title=&quot;Gopher Package Names&quot;
+        src=&quot;/static/63390149f0bc128f01e3f7b3c9dcac2d/828fb/gopher-package-names.jpg&quot;
+        srcset=&quot;/static/63390149f0bc128f01e3f7b3c9dcac2d/ff44c/gopher-package-names.jpg 158w,
+/static/63390149f0bc128f01e3f7b3c9dcac2d/a6688/gopher-package-names.jpg 315w,
+/static/63390149f0bc128f01e3f7b3c9dcac2d/828fb/gopher-package-names.jpg 630w,
+/static/63390149f0bc128f01e3f7b3c9dcac2d/4b190/gopher-package-names.jpg 800w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h1&gt;개요&lt;/h1&gt;
+&lt;p&gt;Go 코드는 패키지로 구성된다.
+패키지 내부에서는 정의된 어떤 식별자(이름)도 참조할 수 있지만 패키지의 클라이언트는 노출된 타입, 함수, 상수 그리고 변수만 참조할 수 있다.
+이런 참조는 항상 &lt;code class=&quot;language-text&quot;&gt;foo.Bar&lt;/code&gt; 와 같은 프리픽스를 포함한다.
+&lt;code class=&quot;language-text&quot;&gt;foo.Bar&lt;/code&gt;는 임포트한 &lt;code class=&quot;language-text&quot;&gt;foo&lt;/code&gt; 패키지에서 노출된 이름 &lt;code class=&quot;language-text&quot;&gt;Bar&lt;/code&gt;을 참조한다.&lt;/p&gt;
+&lt;p&gt;좋은 패키지 이름은 코드를 더 좋게 만든다.
+좋은 패키지 이름은 패키지 내용에 대한 컨텍스트를 제공하고, 패키지 사용자가 패키지가 무엇을 위한 것이고 어떻게 사용하는지를 이해하기 쉽게 한다.
+또한 좋은 패키지 이름은 패키지 매인테이너들이 패키지에 그것과 관련된 어떤 것을 포함하고 포함하지 않을지 결정하는 것을 돕는다.&lt;/p&gt;
+&lt;p&gt;잘 지어진 패키지 이름은 필요한 코드를 쉽게 찾을 수 있도록 만든다.&lt;/p&gt;
+&lt;p&gt;이펙티브 Go 문서는 패키지, 타입, 함수, 변수 네이밍에 대한 &lt;a href=&quot;https://golang.org/doc/effective_go.html#names&quot;&gt;가이드라인&lt;/a&gt;을 제공한다.
+이 블로그는 그 토론을 확장하고 표준 라이브러리에서 찾아낸 이름들 확인해 본다.
+또한 나쁜 이름에 대해 살펴보고 어떻게 고칠지에 대해서도 토론한다.&lt;/p&gt;
+&lt;h1&gt;패키지 이름&lt;/h1&gt;
+&lt;p&gt;좋은 패키지 이름은 짧고 간결하다.
+&lt;code class=&quot;language-text&quot;&gt;언더바(under_scores)&lt;/code&gt;나 &lt;code class=&quot;language-text&quot;&gt;대소문자 섞어쓰기(mixedCaps)&lt;/code&gt;가 없이 소문자로 이뤄진다.
+좋은 패키지 이름은 간단한 명사로 이뤄진다. 다음 처럼 말이다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;time&lt;/code&gt; (시간 측정 및 출력 기능 제공)&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;list&lt;/code&gt; (이중 링크드 리스트 구현)&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;http&lt;/code&gt; (HTTP 서버 및 클라이언트 구현 제공)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;다른 언어의 일반적인 이름 스타일은 Go 프로그램에서는 관용적이지 않을 수 있다.
+여기 다른 언어에서는 좋은 스타일의 이름일지도 모르지만 Go에서는 그렇지 않은 이름 예시가 2가지가 있다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;computeServiceClient&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;priority_queue&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Go 패키지는 타입과 함수를 노출한다.
+예를 들면, &lt;code class=&quot;language-text&quot;&gt;compute&lt;/code&gt; 패키지는 여러 클라이언트들 중에 계산(compute) 기능만 분할하여 서비스를 이용할 수 있는 메소드들을 노출한 &lt;code class=&quot;language-text&quot;&gt;Client&lt;/code&gt; 타입을 노출할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;약자는 신중하게 사용한다.&lt;/strong&gt; 약자가 프로그래머들에에 익숙하다면 패키지 이름을 약자로 만들 수도 있다.
+널리 사용되는 패키지에는 종종 축약된 이름이 있다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;strconv&lt;/code&gt; (string conversion)&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;syscall&lt;/code&gt; (system call)&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;fmt&lt;/code&gt; (formatted I/O)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;반면에, 모호하거나 명확하지 않다면 패키지 이름을 축약하지 마라.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;사용자에게서 좋은 이름을 빼앗지 마라.&lt;/strong&gt; 클라이언트 코드에서 일반적으로 사용되는 이름들은 패키지 이름으로 피해야 한다.
+예를 들면, buf는 버퍼에 대한 좋은 변수명이기 때문에 buffered I/O 패키지는 &lt;code class=&quot;language-text&quot;&gt;buf&lt;/code&gt;아 아니라 &lt;code class=&quot;language-text&quot;&gt;bufio&lt;/code&gt;로 불린다.&lt;/p&gt;
+&lt;h1&gt;패키지 컨텐츠 이름&lt;/h1&gt;
+&lt;p&gt;클라이언트 코드는 패키지의 이름과 패키지 컨텐츠의 이름을 함께 사용하기 때문에 그 둘은 연결되어 있다(coupled).
+패키지를 설계할 때는 클라이언트 쪽 관점을 가져라.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;말더듬기(반복)를 피해라.&lt;/strong&gt; 클라이언트 코드는 패키지 이름을 패키지 컨텐츠를 참조하는데 프리픽스로 사용하므로 패키지 컨텐츠의 이름은 패키지의 이름을 반복할 필요가 없다.
+&lt;code class=&quot;language-text&quot;&gt;http&lt;/code&gt; 패키지에서 제공하는 HTTP 서버는 &lt;code class=&quot;language-text&quot;&gt;HTTPServer&lt;/code&gt;가 아니라 &lt;code class=&quot;language-text&quot;&gt;Server&lt;/code&gt;라고 불린다.
+클라이언트 코드는 &lt;code class=&quot;language-text&quot;&gt;http.Server&lt;/code&gt; 라고 이 타입을 참고할 것이기 때문에 모호하지 않다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;함수 이름을 단순화 해라.&lt;/strong&gt; 함수가 &lt;code class=&quot;language-text&quot;&gt;pkg.Pkg&lt;/code&gt; (또는 &lt;code class=&quot;language-text&quot;&gt;*pkg.Pkg&lt;/code&gt; ) 타입의 값을 리턴한다면, 혼동 없이 함수 이름에서 타입 이름을 생략할 수 있다:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;start &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; time&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Now&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;                                  &lt;span class=&quot;token comment&quot;&gt;// start is a time.Time&lt;/span&gt;
+t&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; err &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; time&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Parse&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;time&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Kitchen&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;6:06PM&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;         &lt;span class=&quot;token comment&quot;&gt;// t is a time.Time&lt;/span&gt;
+ctx &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; context&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;WithTimeout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ctx&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;time&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Millisecond&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;token comment&quot;&gt;// ctx is a context.Context&lt;/span&gt;
+ip&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; ok &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; userip&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;FromContext&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ctx&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;                    &lt;span class=&quot;token comment&quot;&gt;// ip is a net.IP&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;pkg&lt;/code&gt; 패키지의 &lt;code class=&quot;language-text&quot;&gt;New&lt;/code&gt;라는 이름의 함수는 &lt;code class=&quot;language-text&quot;&gt;pkg.Pkg&lt;/code&gt; 타입의 값을 리턴한다.
+이는 그 타입을 클라이언트 코드에서 사용하기 위한 표준 엔트리 포인트이다:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;q &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; list&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;token comment&quot;&gt;// q is a *list.List&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;어떤 함수가 &lt;code class=&quot;language-text&quot;&gt;pkg.T&lt;/code&gt; 타입의 값을 리턴하고 &lt;code class=&quot;language-text&quot;&gt;T&lt;/code&gt;가 &lt;code class=&quot;language-text&quot;&gt;Pkg&lt;/code&gt;가 아니라면, 클라이언트 코드가 이해하기 쉽도록 함수 이름에 &lt;code class=&quot;language-text&quot;&gt;T&lt;/code&gt;를 포함할 수도 있다.
+여러 New 같은 함수를 가진 패키지의 일반적인 상황은 다음과 같다:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;d&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; err &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; time&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;ParseDuration&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;10s&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;token comment&quot;&gt;// d is a time.Duration&lt;/span&gt;
+elapsed &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; time&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Since&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;start&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;         &lt;span class=&quot;token comment&quot;&gt;// elapsed is a time.Duration&lt;/span&gt;
+ticker &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; time&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;NewTicker&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;d&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;          &lt;span class=&quot;token comment&quot;&gt;// ticker is a *time.Ticker&lt;/span&gt;
+timer &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; time&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;NewTimer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;d&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;            &lt;span class=&quot;token comment&quot;&gt;// timer is a *time.Timer&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;서로 다른 패키지들에서 타입 이름들이 동일할 수 있다. 왜냐하면 클라이언트 코드 관점에서 그런 이름들은 패키지 이름으로 구별되기 때문이다.
+예를 들면, 표준 라이브러리는 &lt;code class=&quot;language-text&quot;&gt;jpeg.Reader&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;bufio.Reader&lt;/code&gt; 그리고 &lt;code class=&quot;language-text&quot;&gt;csv.Reader&lt;/code&gt; 를 포함해 &lt;code class=&quot;language-text&quot;&gt;Reader&lt;/code&gt; 라는 이름의 타입을 여러 개 가지고 있다.
+각 패키지 이름은 &lt;code class=&quot;language-text&quot;&gt;Reader&lt;/code&gt;와 만나 좋은 타입 이름을 만든다.&lt;/p&gt;
+&lt;p&gt;패키지 이름이 패키지 컨텐츠를 위해 이런 의미의 프리픽스라고 생각할 수 없다면, 패키지 추상화 경계가 잘못된 것이다.
+클라이언트가 사용하는 것처럼 코드를 작성하고, 결과가 나쁘다면 패키지를 재구성하라.
+이 접근법이 클라이언트들이 이해하기 쉽고 패키지 개발자들이 유지보수하기 쉬운 패키지를 만들어 낼 것이다.&lt;/p&gt;
+&lt;h1&gt;패키지 경로&lt;/h1&gt;
+&lt;p&gt;Go 패키지는 이름과 경로를 모두 가지고 있다.
+패키지 이름은 소스 파일의 package 문(statement)에 의해서 기술된다. 클라이언트 코드는 이를 패키지의 노출된 이름을 위한 프리픽스로 사용한다.
+클라이언트 코드는 패키지를 임포트할 때 패키지 경로를 사용한다.
+관례적으로, 패키지 경로의 마지막 요소가 패키지 이름이다:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;context&quot;&lt;/span&gt;                &lt;span class=&quot;token comment&quot;&gt;// package context&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;fmt&quot;&lt;/span&gt;                    &lt;span class=&quot;token comment&quot;&gt;// package fmt&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;golang.org/x/time/rate&quot;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// package rate&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;os/exec&quot;&lt;/span&gt;                &lt;span class=&quot;token comment&quot;&gt;// package exec&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;빌드 도구는 패키지 경로를 디렉토리에 맵핑한다.
+Go 도구(go tool)는 &lt;code class=&quot;language-text&quot;&gt;$GOPATH/src/github.com/user/hello&lt;/code&gt; 디렉토리 내에서 &lt;code class=&quot;language-text&quot;&gt;&quot;github.com/user/hello&quot;&lt;/code&gt; 경로의 소스 파일을 찾기 위해 &lt;a href=&quot;https://golang.org/doc/code.html#GOPATH&quot;&gt;GOPATH&lt;/a&gt;환경 변수를 이용한다.
+(물론 이 상황은 친숙하지만, 용어와 패키지의 구조를 명확히 하는 것이 중요하다.)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;디렉토리들&lt;/strong&gt; 표준 라이브러리는 관련 프로토콜과 알고리즘 패키지를 그룹화 하기 위해 &lt;code class=&quot;language-text&quot;&gt;crypto&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;container&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;encoding&lt;/code&gt;, 그리고 &lt;code class=&quot;language-text&quot;&gt;image&lt;/code&gt; 같은 디렉토리를 사용한다.
+이 디렉토리들과 패키지들 사이에는 실제적인 관계는 없다; 디렉토리는 단지 파일들을 정렬하는 방법만 제공한다.
+모든 패키지는 순환 임포트를 만들지 않는 한 다른 어떤 패키지든 임포트할 수 있다.&lt;/p&gt;
+&lt;p&gt;다른 패키지의 타입이 모호하지 않은 동일한 이름을 가질 수 있는 것 처럼, 다른 디렉토리 내의 패키지도 동일한 이름을 가질 수 있다.
+예를 들면, &lt;a href=&quot;https://golang.org/pkg/runtime/pprof&quot;&gt;runtime/pprof&lt;/a&gt; 은 &lt;a href=&quot;https://github.com/google/pprof&quot;&gt;pprof&lt;/a&gt; 프로파일 툴을 제공하고, &lt;a href=&quot;https://golang.org/pkg/net/http/pprof&quot;&gt;net/http/pprof&lt;/a&gt;는 HTTP 포맷의 프로파일 데이터를 보여주는 HTTP 엔드포인트를 제공한다.
+클라이언트 코드는 패키지를 임포트 하기 위해 패키지 경로를 사용하기 때문에 혼란이 없다.
+소스 파일이 두 가지 &lt;code class=&quot;language-text&quot;&gt;pprof&lt;/code&gt; 패키지를 임포트해야 하면, 패키지 하나 또는 둘다 리네임&lt;a href=&quot;https://golang.org/ref/spec#Import_declarations&quot;&gt;rename&lt;/a&gt; 할 수 있다.
+임포트된 패키지를 리네임할 때, 변경될 로컬 이름도 패키지 이름과 동일한 가이드라인을 따라야 한다(소문자 사용, &lt;code class=&quot;language-text&quot;&gt;언터바(under_scores)&lt;/code&gt; 금지, &lt;code class=&quot;language-text&quot;&gt;대소문자 혼용(mixedCaps)&lt;/code&gt; 금지 ).&lt;/p&gt;
+&lt;h1&gt;나쁜 패키지 이름들&lt;/h1&gt;
+&lt;p&gt;나쁜 패키지 이름은 코드 탐색과 유지를 어렵게 한다.
+여기 나쁜 이름을 인지하고 수정하는 몇 가지 가이드라인이 있다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;무의미한 패키지 이름을 피하라.&lt;/strong&gt; &lt;code class=&quot;language-text&quot;&gt;util&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;common&lt;/code&gt;, 또는 &lt;code class=&quot;language-text&quot;&gt;misc&lt;/code&gt; 등의 패키지 이름은 클라이언트에게 패키지 컨텐츠에 대한 정보를 제공하지 못한다.
+이는 패키지 사용을 힘들게 하고 매인테이너들이 패키지에 집중력을 유지하기 힘들게 한다.
+이런 패키지에는 시간이 지남에 따라, 불필요한 이름은 특히 커다란 프로그램에서 불필요하고 현저히 컴파일을 느리게 만드는 종속성들이 누적된다.
+이런 패키지 이름들은 일반적이기 때문에, 임포트한 클라이언트 코드의 다른 패키지와 충돌할 가능성이 높고 다른 것들과 구별하기 위해 이름을 다시 만들게 강요하게 된다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;일반적인 패키지를 분리하라.&lt;/strong&gt; 이런 패키지를 수정하려면, 공통 이름을 가진 타입과 함수를 찾아 별도의 패키지로 만들라.
+예를 들면, 이런 패키지가 있다면&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; util
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;NewStringSet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;SortStringSet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;클라이언트 코드는 다음과 같고&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;set &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; util&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;NewStringSet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;util&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;SortStringSet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;set&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;컨텐츠에 적당한 이름을 선택해 이 함수들을 &lt;code class=&quot;language-text&quot;&gt;util&lt;/code&gt;에서 분리해 새 패키지로 넣는다:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; stringset
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;그러면 클라이언트 코드는 다음과 같이 되고&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;set &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; stringset&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;stringset&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;set&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;변경한 후에는 새 패키지를 개선하는 방법을 쉽게 알수 있다:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; stringset
+&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; Set &lt;span class=&quot;token keyword&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;bool&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; Set &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;s Set&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;클라이언트 코드도 더 간단해진다:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;set &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; stringset&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;set&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;패지키 이름은 디자인의 중요한 한 부분이다.
+여러분의 프로젝트에서 의미 없는 패키지 이름을 제거하라.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;모든 API를 위한 단독 패키지를 사용하지 마라&lt;/strong&gt; 많은 프로그래머들이 코드 베이스의 진입점을 찾기 쉽게 만들거라 생각하고 좋은 의도로 모든 프로그램의 노출 인터페이스를 &lt;code class=&quot;language-text&quot;&gt;api&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;types&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;interfaces&lt;/code&gt;와 같은 이름의 단독 패키지에 둔다.
+이는 실수이다.
+이런 패키지도&lt;code class=&quot;language-text&quot;&gt;util&lt;/code&gt;나 &lt;code class=&quot;language-text&quot;&gt;common&lt;/code&gt; 이름의 패키지와 마단가지로 제한 없이 커지고, 사용자들에게 사용 지침이나 정교한 종속성을 제공하지 않고, 다른 임포트 패키지와 충돌하는 등의 문제를 유발한다.
+구현으로부터 공개 패키지를 분리하기 위해 디렉토리를 사용하는 등으로 패키지를 분리하라.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;불필요한 패키지 이름 충돌을 피하라&lt;/strong&gt; 다른 디렉토리에 패키지는 동일한 이름을 가질 수 있지만, 자주 함께 사용되는 패키지들은 고유한 이름을 가져야 한다.
+자주 함께 사용되는 패키지들이 이름이 같으면 혼동을 야기하고 클라이언트 코드에 로컬 리네임을 필요하게 만든다.
+동일한 이유로 &lt;code class=&quot;language-text&quot;&gt;io&lt;/code&gt;나 &lt;code class=&quot;language-text&quot;&gt;http&lt;/code&gt; 같은 유명한 표준 패키지의 이름을 사용하는 것을 피해라.&lt;/p&gt;
+&lt;h1&gt;결론&lt;/h1&gt;
+&lt;p&gt;패키지 이름은 Go 프로그램에서 좋은 이름을 위한 중심이다.
+좋은 패키지 이름을 선택하기 위해 시간을 투자해서 코드를 잘 조직화 해야 한다.
+이는 사용자가 패키지를 이해하고 사용하는데 도움이 되고 메인테이너들이 패키지를 우아하게 성장시키는데 도움이 된다.&lt;/p&gt;
+&lt;h1&gt;더 읽을거리&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://golang.org/doc/effective_go.html&quot;&gt;Effective Go&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://golang.org/doc/code.html&quot;&gt;How to Write Go Code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://blog.golang.org/organizing-go-code&quot;&gt;Organizing Go Code (2012 blog post)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://talks.golang.org/2014/organizeio.slide&quot;&gt;Organizing Go Code (2014 Google I/O talk)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://blog.billo.io/devposts/golang_naming_convention/&quot;&gt;Golang 에서의 명명 규칙&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Vim 입력모드 노말모드 전환시 한/영 자동 전환하기]]></title><description><![CDATA[Vim에서 한글 입력 중에 Esc로 노말 모드 진입할 때 다시 영문으로 바꿔줘야 하는 불편함이 있다. 이 문제를 해결해 보려고 여러 사람들이 여러 방법을 시도 했고 그 흔적들은 아래 블로그 글들에서 볼 수 있다. Vim Vim에서 ESC…]]></description><link>https://byounghoonkim.github.io/vim-kor-eng-auto-switch/</link><guid isPermaLink="false">https://byounghoonkim.github.io/vim-kor-eng-auto-switch/</guid><pubDate>Sat, 23 May 2020 13:06:31 GMT</pubDate><content:encoded>&lt;p&gt;Vim에서 한글 입력 중에 Esc로 노말 모드 진입할 때 다시 영문으로 바꿔줘야 하는 불편함이 있다.&lt;/p&gt;
+&lt;p&gt;이 문제를 해결해 보려고 여러 사람들이 여러 방법을 시도 했고 그 흔적들은 아래 블로그 글들에서 볼 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://seorenn.blogspot.com/2011/04/vim-vim-esc.html&quot;&gt;Vim Vim에서 ESC를 눌렀을 때 영문 상태로 전환하기 - Seorenn SIGSEGV&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://johngrib.github.io/blog/2017/05/04/input-source/&quot;&gt;Vim 사용시 한/영 전환 문제 해결하기 - 기계인간 John Grib&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://coldmater.tistory.com/177&quot;&gt;VIMOS X한글 입력 상태에서 노멀모드 복귀 후 영어 입력소스로 전환하기 (feat. hammerspoon, autohotkey)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;위 블로그들에서 소개된 방법과 별개로 im-select 라는 툴을 이용하는 방법을 소개한다.
+이 방법을 소개하는 이유는 내게 가장 잘 맞았고 기대한 대로 잘 동작하며 Visual Studio Code 의 Vim Mode에서도 비슷한 방법을 적용할 수 있기 때문이다!&lt;/p&gt;
+&lt;p&gt;아래 설명은 macOS 환경 기준이다.&lt;/p&gt;
+&lt;p&gt;(다른 환경은 시도해 보지 않았다.)&lt;/p&gt;
+&lt;h2&gt;im-select 설치하기&lt;/h2&gt;
+&lt;p&gt;아래 명령으로 im-select라는 툴을 설치한다.&lt;/p&gt;
+&lt;p&gt;(참고 - &lt;a href=&quot;https://github.com/daipeihust/im-select&quot;&gt;https://github.com/daipeihust/im-select&lt;/a&gt;)&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;curl -Ls https://raw.githubusercontent.com/daipeihust/im-select/master/install_mac.sh | sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;위 명령을 실행하면 /usr/local/bin 경로 아래 im-select 라는 실행 파일이 설치된다.&lt;/p&gt;
+&lt;h2&gt;brglng/vim-im-select 플러그인 설치&lt;/h2&gt;
+&lt;p&gt;‘brglng/vim-im-select’라는 Vim 플러그인을 설치한다.&lt;/p&gt;
+&lt;p&gt;(참고 - &lt;a href=&quot;https://github.com/brglng/vim-im-select&quot;&gt;https://github.com/brglng/vim-im-select&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;(vim-plug를 통해 플러그인을 설치했다. 플러그인을 설치하는 방법은 &lt;a href=&quot;https://github.com/junegunn/vim-plug&quot;&gt;vim-plug&lt;/a&gt; 페이지를 참고한다.)&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;call plug#begin(&apos;~/.vim/plugged&apos;)
+    Plug &apos;brglng/vim-im-select&apos;
+call plug#end()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;설치를 완료하면 아래와 같이 한글 입력이 가능한 입력 모드에서
+Esc 키를 한번 누르면 영문으로 입력 언어가 변경되면서 노말 모드로 진입하게 되어
+추가적인 IME 전환이 필요 없어진다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-resp-iframe-wrapper&quot; style=&quot;padding-bottom: 74.6875%; position: relative; height: 0; overflow: hidden; margin-bottom: 1.0725rem&quot; &gt; &lt;iframe src=&quot;https://player.vimeo.com/video/421942102?h=f3018261fb&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen; picture-in-picture&quot; allowfullscreen=&quot;&quot; style=&quot; position: absolute; top: 0; left: 0; width: 100%; height: 100%; &quot;&gt;&lt;/iframe&gt; &lt;p&gt;&lt;a href=&quot;https://vimeo.com/421942102&quot;&gt;vim korean -&amp;gt; english auto switch&lt;/a&gt; from &lt;a href=&quot;https://vimeo.com/user116213665&quot;&gt;kimbh&lt;/a&gt; on &lt;a href=&quot;https://vimeo.com&quot;&gt;Vimeo&lt;/a&gt;.&lt;/p&gt; &lt;/div&gt;
+&lt;p&gt;이 방법의 모드 전환 시 마다 im-select 프로세스를 실행하기 때문에 저사양 환경에서 입력 전환이 조금 지연되는 단점이 있다.&lt;/p&gt;
+&lt;p&gt;하지만 설정이 비교적 쉽고 사양만 따라 준다면 기대한 대로 잘 동작한다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Docker로 Golang 프로젝트 빌드 하기]]></title><description><![CDATA[새로운 Golang 버전이 나오면 내 프로젝트가 잘 빌드 되는지 확인해 보고 싶을 때가 있다.
+또 다른 버전에서 프로젝트가 잘 빌드 되는지 확인해 보고 싶을 때도 있다. 여러 Golang 버전을 관리하는 방법은 gvm…]]></description><link>https://byounghoonkim.github.io/building_golang_using_docker/</link><guid isPermaLink="false">https://byounghoonkim.github.io/building_golang_using_docker/</guid><pubDate>Fri, 25 Oct 2019 13:19:22 GMT</pubDate><content:encoded>&lt;p&gt;새로운 Golang 버전이 나오면 내 프로젝트가 잘 빌드 되는지 확인해 보고 싶을 때가 있다.
+또 다른 버전에서 프로젝트가 잘 빌드 되는지 확인해 보고 싶을 때도 있다.&lt;/p&gt;
+&lt;p&gt;여러 Golang 버전을 관리하는 방법은 &lt;a href=&quot;https://github.com/moovweb/gvm&quot;&gt;gvm&lt;/a&gt; 도 있지만 여러가지 설정도 해야 하고 필요한 버전들을 설치해야 해서 조금 불편할 수도 있다.&lt;/p&gt;
+&lt;p&gt;Docker를 이용하면 간단히 프로젝트를 빌드해 볼 수 있다. 그 방법을 간단히 알아 보자.&lt;/p&gt;
+&lt;h2&gt;샘플 프로젝트&lt;/h2&gt;
+&lt;p&gt;빌드할 프로젝트 hello라는 프로젝트를 만들고 main.go 파일을 작성한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;hello
+├── compile.sh
+└── main.go&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; main
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;fmt&quot;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Hello&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;빌드 하기&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token assign-left variable&quot;&gt;GOLANG_VERSION&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;1.13.1&quot;&lt;/span&gt;
+
+&lt;span class=&quot;token assign-left variable&quot;&gt;GOX_INST_CMD&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;go get github.com/mitchellh/gox&quot;&lt;/span&gt;
+&lt;span class=&quot;token assign-left variable&quot;&gt;GOX_BUILD_CMD&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;gox -output=build/{{.OS}}/{{.Arch}}/{{.Dir}}&quot;&lt;/span&gt;
+
+&lt;span class=&quot;token assign-left variable&quot;&gt;PROJECT_DIR&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;basename&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;`&lt;/span&gt;&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;docker&lt;/span&gt; run -it --rm &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+	-v &lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;)&lt;/span&gt;&lt;/span&gt;:/&lt;span class=&quot;token variable&quot;&gt;$PROJECT_DIR&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+	golang:&lt;span class=&quot;token variable&quot;&gt;$GOLANG_VERSION&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+	&lt;span class=&quot;token function&quot;&gt;bash&lt;/span&gt; -c &lt;span class=&quot;token string&quot;&gt;&quot;cd /&lt;span class=&quot;token variable&quot;&gt;$PROJECT_DIR&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class=&quot;token variable&quot;&gt;$GOX_INST_CMD&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class=&quot;token variable&quot;&gt;$GOX_BUILD_CMD&lt;/span&gt; &amp;amp;&amp;amp; exit&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;위 샘플 compile.sh 스크립트는 golang 1.13.1 버전에서 빌드한다.
+여러 플랫폼용으로 잘 빌드 되는지 확인하기 위해 &lt;a href=&quot;https://github.com/mitchellh/gox&quot;&gt;gox&lt;/a&gt;를 사용해 빌드한다.
+빌드된 바이너리는 host 에 남기기 위해 docker run 명령에 volume 파라미터로 프로젝트 폴더를 연결한다.&lt;/p&gt;
+&lt;h2&gt;빌드 결과&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;file&lt;/span&gt; ./build/**/hello
+./build/darwin/386/hello:     Mach-O i386 executable
+./build/darwin/amd64/hello:   Mach-O &lt;span class=&quot;token number&quot;&gt;64&lt;/span&gt;-bit x86_64 executable
+./build/freebsd/386/hello:    ELF &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;-bit LSB executable, Intel &lt;span class=&quot;token number&quot;&gt;80386&lt;/span&gt;, version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;FreeBSD&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, not stripped
+./build/freebsd/amd64/hello:  ELF &lt;span class=&quot;token number&quot;&gt;64&lt;/span&gt;-bit LSB executable, x86-64, version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;FreeBSD&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, not stripped
+./build/freebsd/arm/hello:    ELF &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;-bit LSB executable, ARM, EABI5 version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;FreeBSD&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, not stripped
+./build/linux/386/hello:      ELF &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;-bit LSB executable, Intel &lt;span class=&quot;token number&quot;&gt;80386&lt;/span&gt;, version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;SYSV&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, not stripped
+./build/linux/amd64/hello:    ELF &lt;span class=&quot;token number&quot;&gt;64&lt;/span&gt;-bit LSB executable, x86-64, version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;SYSV&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, not stripped
+./build/linux/arm/hello:      ELF &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;-bit LSB executable, ARM, EABI5 version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;SYSV&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, not stripped
+./build/linux/mips/hello:     ELF &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;-bit MSB executable, MIPS, MIPS32 version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;SYSV&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, not stripped
+./build/linux/mips64/hello:   ELF &lt;span class=&quot;token number&quot;&gt;64&lt;/span&gt;-bit MSB executable, MIPS, MIPS-III version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;SYSV&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, not stripped
+./build/linux/mips64le/hello: ELF &lt;span class=&quot;token number&quot;&gt;64&lt;/span&gt;-bit LSB executable, MIPS, MIPS-III version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;SYSV&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, not stripped
+./build/linux/mipsle/hello:   ELF &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;-bit LSB executable, MIPS, MIPS32 version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;SYSV&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, not stripped
+./build/linux/s390x/hello:    ELF &lt;span class=&quot;token number&quot;&gt;64&lt;/span&gt;-bit MSB executable, IBM S/390, version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;SYSV&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, not stripped
+./build/netbsd/386/hello:     ELF &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;-bit LSB executable, Intel &lt;span class=&quot;token number&quot;&gt;80386&lt;/span&gt;, version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;NetBSD&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; NetBSD &lt;span class=&quot;token number&quot;&gt;5.99&lt;/span&gt;, not stripped
+./build/netbsd/amd64/hello:   ELF &lt;span class=&quot;token number&quot;&gt;64&lt;/span&gt;-bit LSB executable, x86-64, version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;NetBSD&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; NetBSD &lt;span class=&quot;token number&quot;&gt;5.99&lt;/span&gt;, not stripped
+./build/netbsd/arm/hello:     ELF &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;-bit LSB executable, ARM, EABI5 version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;NetBSD&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; NetBSD &lt;span class=&quot;token number&quot;&gt;5.99&lt;/span&gt;, not stripped
+./build/openbsd/386/hello:    ELF &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;-bit LSB executable, Intel &lt;span class=&quot;token number&quot;&gt;80386&lt;/span&gt;, version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;OpenBSD&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; OpenBSD, not stripped
+./build/openbsd/amd64/hello:  ELF &lt;span class=&quot;token number&quot;&gt;64&lt;/span&gt;-bit LSB executable, x86-64, version &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;OpenBSD&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;, statically linked, &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; OpenBSD, not stripped
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Docker 이미지를 이용하면 비교적 시스템에 영향을 미치지 않고 여러 버전의 golang 에서 기존 프로젝트의 빌드를 테스트 해 볼 수 있다.&lt;/p&gt;</content:encoded></item></channel></rss>
