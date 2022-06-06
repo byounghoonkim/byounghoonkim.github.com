@@ -6,8 +6,8 @@ description: About Me
 
 ## 김병훈 (Byounghoon Kim)
 
-[GitHub](https://github.com/byounghoonkim)
-[Linkedin](https://www.linkedin.com/in/%EB%B3%91%ED%9B%88-%EA%B9%80-6608638b/)
+[GitHub](https://github.com/byounghoonkim) |
+[Linkedin](https://www.linkedin.com/in/%EB%B3%91%ED%9B%88-%EA%B9%80-6608638b/) |
 [Email](mailto:blue021@gmail.com)
 
 -   네이버 클로바 ([Naver Clova](https://clova.ai/ko))
