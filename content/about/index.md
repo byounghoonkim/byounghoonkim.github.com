@@ -1,12 +1,12 @@
 ---
-title: About
+title: About Me
 date: "2022-06-06"
-description: About author
+description: About Me
 ---
 
 ## 김병훈(Byounghoon Kim)
 
-[Github](https://github.com/byounghoon-kim)
+[GitHub](https://github.com/byounghoon-kim)
 [Linkedin](https://www.linkedin.com/in/%EB%B3%91%ED%9B%88-%EA%B9%80-6608638b/)
 [Email](mailto:blue021@gmail.com)
 
