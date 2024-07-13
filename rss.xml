@@ -1,14 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[Byounghoon's Personal Blog]]></description><link>https://byounghoonkim.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 06 Jun 2022 08:47:14 GMT</lastBuildDate><item><title><![CDATA[About Me]]></title><description><![CDATA[김병훈 (Byounghoon Kim) GitHub |
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[Byounghoon's Personal Blog]]></description><link>https://byounghoonkim.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 13 Jul 2024 10:22:37 GMT</lastBuildDate><item><title><![CDATA[About Me]]></title><description><![CDATA[김병훈 (Byounghoon Kim) GitHub |
 Linkedin |
-Email 네이버 클로바 (Naver Clova) AI Product, Platform 개발 Golang, Python 오늘의집 (버킷플레이스) 백엔드 개발자 Rails…]]></description><link>https://byounghoonkim.github.io/</link><guid isPermaLink="false">https://byounghoonkim.github.io/</guid><pubDate>Mon, 06 Jun 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;김병훈 (Byounghoon Kim)&lt;/h2&gt;
+Email 네이버 클라우드(NAVER Cloud) AI Serving Platform 개발 Rust, Python 네이버 클로바 (NAVER Clova) AI Product…]]></description><link>https://byounghoonkim.github.io/</link><guid isPermaLink="false">https://byounghoonkim.github.io/</guid><pubDate>Mon, 06 Jun 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;김병훈 (Byounghoon Kim)&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/byounghoonkim&quot;&gt;GitHub&lt;/a&gt; |
 &lt;a href=&quot;https://www.linkedin.com/in/%EB%B3%91%ED%9B%88-%EA%B9%80-6608638b/&quot;&gt;Linkedin&lt;/a&gt; |
 &lt;a href=&quot;mailto:blue021@gmail.com&quot;&gt;Email&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;네이버 클로바 (&lt;a href=&quot;https://clova.ai/ko&quot;&gt;Naver Clova&lt;/a&gt;)
+&lt;li&gt;네이버 클라우드(&lt;a href=&quot;https://ncloud.com/&quot;&gt;NAVER Cloud&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;AI Serving Platform 개발&lt;/li&gt;
+&lt;li&gt;Rust, Python&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;네이버 클로바 (&lt;a href=&quot;https://clova.ai/ko&quot;&gt;NAVER Clova&lt;/a&gt;)
 &lt;ul&gt;
 &lt;li&gt;AI Product, Platform 개발&lt;/li&gt;
-&lt;li&gt;Golang, Python&lt;/li&gt;
+&lt;li&gt;GoLang, Python&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;오늘의집 (&lt;a href=&quot;https://www.bucketplace.co.kr/&quot;&gt;버킷플레이스&lt;/a&gt;)
